@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otrabotka-app
+  labels:
+    app: otrabotka-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: otrabotka-app
+  template:
+    metadata:
+      labels:
+        app: otrabotka-app
+    spec:
+      containers:
+        - name: otrabotka-app
+          image: YOUR_DOCKERHUB_USERNAME/otrabotka-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20

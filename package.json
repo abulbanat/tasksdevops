@@ -1,0 +1,12 @@
+{
+  "name": "otrabotka-app",
+  "version": "1.0.0",
+  "description": "Demo app with CI/CD to Docker Hub and Kubernetes deployment",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
